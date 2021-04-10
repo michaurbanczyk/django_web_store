@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
     'easy_thumbnails',
 ]
 
@@ -75,6 +76,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myshop.wsgi.application'
 
+# Braintree sandbox
+BRAINTREE_MERCHANT_ID = "wrj35tb7kmkk483x"
+BRAINTREE_PUBLIC_KEY = "qn84689jv7dcj96p"
+BRAINTREE_PRIVATE_KEY = "9acc1f9714fcc564e6d37491c7b9f232"
+
+import braintree
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY,
+)
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
