@@ -11,11 +11,17 @@
         {% for item in cart %}
             <li>
                 {{ item.quantity }}x {{ item.product.name }}
-                <span>{{ item.total_price }} zl</span>
+                <span>{{ item.total_price|floatformat:2 }} zl</span>
             </li>
         {% endfor %}
+        {% if cart.coupon %}
+            <li>
+                Kupon "{{ cart.coupon.code }}" {{ cart.coupon.discount }}% rabatu
+                <span>-  {{ cart.get_discount|floatformat:2 }} zl </span>
+            </li>
+        {% endif %}
     </ul>
-    <p>Wartosc calkowita: {{ cart.get_total_sum }}</p>
+    <p>Wartosc calkowita: {{ cart.get_total_price_after_discount|floatformat:2}}</p>
     </div>
 
     <form action="." method="post" class="order-form">
