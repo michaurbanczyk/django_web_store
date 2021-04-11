@@ -12,7 +12,7 @@ def payment_request(request):
 
     if request.method == 'POST':
         nonce = request.POST.get('payment_method_nonce', None)
-        result = braintree.Transaction.sale({
+        result = gateway.transaction.sale({
             'amount': f"{order.get_total_cost()}",
             'payment_method_nonce': nonce,
             'options': {
@@ -25,9 +25,9 @@ def payment_request(request):
             order.save()
             return redirect('payment:done')
         else:
-            return redirect('payment:cancel')
+            return redirect('payment:canceled')
     else:
-        client_token = braintree.ClientToken.generate()
+        client_token = gateway.client_token.generate()
         return render(request,
                       'payment/process.html',
                       {

@@ -1,12 +1,11 @@
-from celery.task.base import task
+from celery import shared_task
 from django.core.mail import send_mail
 from .models import Order
 
 
-@task
+@shared_task
 def order_created(order_id):
-
-    order = Order.objects.get(order_id)
+    order = Order.objects.get(pk=order_id)
     subject = f"Zamownienie nr {order.id}"
     message = f"Witaj, {order.first_name}! Zlozyles zamowienie w naszym sklepie!." \
               f"Identyfikator zamowienia to {order.id}"
@@ -16,3 +15,7 @@ def order_created(order_id):
                           [order.email])
     return mail_sent
 
+
+@shared_task
+def add(x,y):
+    return x+y

@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -76,19 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myshop.wsgi.application'
 
-# Braintree sandbox
-BRAINTREE_MERCHANT_ID = "wrj35tb7kmkk483x"
-BRAINTREE_PUBLIC_KEY = "qn84689jv7dcj96p"
-BRAINTREE_PRIVATE_KEY = "9acc1f9714fcc564e6d37491c7b9f232"
-
-import braintree
-BRAINTREE_CONF = braintree.Configuration(
-    braintree.Environment.Sandbox,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY,
-)
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -104,7 +90,7 @@ DATABASES = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# CELERY_TASK_ALWAYS_EAGER = True
+CELERY_TASK_ALWAYS_EAGER = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -147,3 +133,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Braintree sandbox
+BRAINTREE_MERCHANT_ID = "wrj35tb7kmkk483x"
+BRAINTREE_PUBLIC_KEY = "qn84689jv7dcj96p"
+BRAINTREE_PRIVATE_KEY = "9acc1f9714fcc564e6d37491c7b9f232"
+
+import braintree
+
+
+BRAINTREE_CONF = braintree.Configuration(
+    braintree.Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY,
+)
+
